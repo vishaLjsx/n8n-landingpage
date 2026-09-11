@@ -1,0 +1,688 @@
+/* ==========================================================================
+   Hero Section 3D WebGL Shader Gradient Scoping
+   Strictly scoped to Navbar + Hero
+   ========================================================================== */
+
+/* Scope container encompassing exclusively the Navbar and Hero */
+.hero-viewport-scope {
+  position: relative;
+  width: 100%;
+  background-color: var(--color-canvas, #ffffff);
+  overflow: hidden;
+}
+
+/* Ambient Space Aurora 3D WebGL Shader Gradient Canvas */
+.space-aurora-shader,
+.cosmic-shader-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  display: block;
+  opacity: 1;
+}
+
+[data-theme="dark"] .space-aurora-shader,
+[data-theme="dark"] .cosmic-shader-canvas {
+  mix-blend-mode: screen;
+}
+
+/* Eradicate static box grids, graph paper patterns, and overlay lines across all sections */
+.hero-grid-overlay,
+.schematic-grid,
+.schematic-grid-bg,
+.pricing-grid-overlay,
+.grid-overlay {
+  display: none !important;
+  background-image: none !important;
+}
+
+/* Content Layer: Ensure .page-container and all UI cards, text, buttons, and modals are z-index: 2 and pointer-events: auto */
+.page-container,
+.site-container,
+.hero-viewport-scope .hero-section .site-container,
+.pricing-content-layer,
+.cta-band-inner,
+.pricing-card,
+.problem-card,
+.process-card,
+.service-card,
+.testimonial-card,
+.faq-item,
+.modal-dialog,
+.hero-kicker-wrap,
+.hero-headline,
+.hero-subhead,
+.hero-cta-group,
+.hero-stats-row,
+.workflow-chain-card,
+.btn,
+button,
+a,
+input,
+textarea {
+  position: relative;
+  z-index: 2;
+  pointer-events: auto;
+}
+
+/* Sticky Navbar within the hero scope */
+.hero-viewport-scope .site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-hairline, #e3e3e3);
+}
+
+/* Ensure Hero section itself is transparent so canvas underneath shows through */
+.hero-viewport-scope .hero-section {
+  position: relative;
+  z-index: 2;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+/* Ensure all interactive hero elements remain razor-sharp and clickable */
+.hero-viewport-scope .hero-section .site-container {
+  position: relative;
+  z-index: 2;
+  pointer-events: auto;
+}
+
+.hero-viewport-scope .hero-kicker-wrap,
+.hero-viewport-scope .hero-headline,
+.hero-viewport-scope .hero-subhead,
+.hero-viewport-scope .hero-cta-group,
+.hero-viewport-scope .hero-stats-row,
+.hero-viewport-scope .workflow-chain-card {
+  position: relative;
+  z-index: 2;
+  pointer-events: auto;
+}
+
+/* Stat cards with crisp glassmorphic backing to keep numbers high contrast */
+.hero-viewport-scope .hero-stats-row {
+  background-color: rgba(227, 227, 227, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.hero-viewport-scope .hero-stat-card {
+  background-color: rgba(255, 255, 255, 0.94);
+}
+
+/* Workflow chain card with clean contrast */
+.hero-viewport-scope .workflow-chain-card {
+  background-color: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* ==========================================================================
+   Pricing Section 3D WebGL Shader Gradient & Schematic Styles
+   Strictly scoped to Pricing section bounds with 40px x 40px grid
+   ========================================================================== */
+.pricing-section {
+  position: relative;
+  width: 100%;
+  padding-top: var(--section-padding-y, 88px);
+  padding-bottom: var(--section-padding-y, 88px);
+  border-bottom: 1px solid var(--border-hairline, #e3e3e3);
+  background-color: var(--color-canvas, #ffffff);
+  overflow: hidden;
+}
+
+/* Layer 2: Interactive Pricing Content */
+
+/* Layer 2: Interactive Pricing Content */
+.pricing-content-layer {
+  position: relative;
+  z-index: 2;
+  pointer-events: auto;
+}
+
+.pricing-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
+/* Base Pricing Card - Highly Selectable */
+.pricing-card {
+  position: relative;
+  border-radius: var(--radius-rect, 2px);
+  padding: 36px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pricing-card:hover {
+  transform: translateY(-4px);
+}
+
+.pricing-card:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* Generic White Cards (Tiers 1 & 2) */
+.pricing-card-standard {
+  background-color: #ffffff;
+  border: 1px solid var(--border-hairline, #e3e3e3);
+  color: var(--color-ink);
+}
+
+.pricing-card-standard:hover {
+  border-color: var(--color-accent, #6a2bff);
+  box-shadow: 0 4px 20px rgba(106, 43, 255, 0.08);
+}
+
+/* Selected State for Standard Cards */
+.pricing-card-standard.is-tier-selected {
+  border: 2px solid var(--color-accent, #6a2bff);
+  box-shadow: 0 0 0 4px var(--color-accent-wash, #f7f3ff), 0 8px 24px rgba(106, 43, 255, 0.12);
+  transform: translateY(-6px);
+}
+
+/* Signature Obsidian Card (Enterprise) */
+.pricing-card-enterprise {
+  background-color: #1a1a1e;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #e8e8ea;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.pricing-card-enterprise:hover {
+  border-color: #a78bfa;
+  box-shadow: 0 6px 28px rgba(167, 139, 250, 0.25);
+}
+
+/* Selected State for Enterprise Card */
+.pricing-card-enterprise.is-tier-selected {
+  border: 2px solid #a78bfa;
+  box-shadow: 0 0 0 4px rgba(167, 139, 250, 0.2), 0 8px 32px rgba(167, 139, 250, 0.3);
+  transform: translateY(-6px);
+}
+
+.pricing-card-enterprise .pricing-tier-name {
+  color: #ffffff;
+}
+
+.pricing-card-enterprise .pricing-specs-label {
+  color: #a0a0a5;
+}
+
+.pricing-card-enterprise .pricing-description {
+  color: #b5b5ba;
+}
+
+.pricing-card-enterprise .pricing-period {
+  color: #8f8f96;
+}
+
+.pricing-card-enterprise .pricing-feature-item {
+  color: #d8d8dc;
+}
+
+.pricing-card-enterprise .pricing-divider {
+  border-color: #2a2a30;
+}
+
+/* Selector Header Row */
+.pricing-selector-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+/* Schematic Radio Toggle Pill */
+.schematic-radio-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+  padding: 4px 8px;
+  border-radius: var(--radius-rect, 2px);
+  border: 1px solid var(--border-hairline, #e3e3e3);
+  background-color: #fafafa;
+  color: var(--color-text-tertiary);
+  transition: all 0.2s ease;
+}
+
+.pricing-card-enterprise .schematic-radio-pill {
+  background-color: #26262c;
+  border-color: #363640;
+  color: #9f9fa8;
+}
+
+.radio-indicator-disc {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-text-tertiary);
+  background-color: transparent;
+  transition: all 0.2s ease;
+}
+
+.pricing-card-enterprise .radio-indicator-disc {
+  border-color: #8a8a94;
+}
+
+.schematic-radio-pill.is-active {
+  border-color: var(--color-accent, #6a2bff);
+  background-color: var(--color-accent-wash, #f7f3ff);
+  color: var(--color-accent, #6a2bff);
+  font-weight: var(--font-weight-medium);
+}
+
+.schematic-radio-pill.is-active .radio-indicator-disc {
+  border-color: var(--color-accent, #6a2bff);
+  background-color: var(--color-accent, #6a2bff);
+  box-shadow: 0 0 0 2px var(--color-accent-tint, #efe7ff);
+}
+
+.pricing-card-enterprise .schematic-radio-pill.is-active {
+  border-color: #a78bfa;
+  background-color: rgba(106, 43, 255, 0.22);
+  color: #eedbff;
+}
+
+.pricing-card-enterprise .schematic-radio-pill.is-active .radio-indicator-disc {
+  border-color: #a78bfa;
+  background-color: #a78bfa;
+  box-shadow: 0 0 0 2px rgba(167, 139, 250, 0.4);
+}
+
+/* Recommended Schematic Pill */
+.pricing-recommended-badge {
+  background-color: rgba(106, 43, 255, 0.18);
+  border: 1px solid rgba(106, 43, 255, 0.4);
+  color: #d8c2ff;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+  padding: 3px 8px;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+
+/* Card Top Bar & Typography */
+.pricing-card-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.pricing-tier-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pricing-glyph-mono {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--color-text-tertiary);
+}
+
+.pricing-card-enterprise .pricing-glyph-mono {
+  color: #a78bfa;
+}
+
+.pricing-tier-name {
+  font-family: var(--font-display);
+  font-size: 1.1875rem;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: -0.01em;
+}
+
+/* Pricing Figure - Right Aligned as specified */
+.pricing-figure-block {
+  text-align: right;
+  margin-bottom: 14px;
+}
+
+.pricing-amount {
+  font-family: var(--font-display);
+  font-size: 2.75rem;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: -0.04em;
+  color: #2b1357; /* Specified rich purple/violet for standard tiers */
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+/* Plasma Violet gradient accent for Enterprise price number */
+.pricing-amount-plasma {
+  background: var(--gradient-hero);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+.pricing-period {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-text-tertiary);
+  text-transform: lowercase;
+}
+
+.pricing-description {
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--color-text-secondary);
+  margin-bottom: 20px;
+  min-height: 42px;
+}
+
+.pricing-divider {
+  border-top: 1px solid #eeeeee;
+  margin-bottom: 20px;
+}
+
+.pricing-specs-label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--color-text-tertiary);
+  letter-spacing: 0.05em;
+  margin-bottom: 12px;
+}
+
+/* Feature List & Monospace Bullets */
+.pricing-features-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+
+.pricing-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.84375rem;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+
+.feature-bullet-mono {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-accent);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.pricing-card-enterprise .feature-bullet-mono {
+  color: #c4b5fd;
+}
+
+/* Buttons */
+.pricing-action-wrap {
+  margin-top: auto;
+}
+
+/* btn-nav-pill style for Generic cards */
+.btn-nav-pill {
+  width: 100%;
+  background-color: #ffffff;
+  color: var(--color-ink);
+  border: 1px solid var(--border-hairline, #e3e3e3);
+  padding: 10px 18px;
+  font-size: 0.9375rem;
+  font-weight: var(--font-weight-medium);
+  border-radius: var(--radius-rect, 2px);
+  transition: all 0.15s ease;
+}
+
+.btn-nav-pill:hover {
+  border-color: var(--color-ink);
+  background-color: #fafafa;
+  color: var(--color-ink);
+}
+
+/* Selected state for generic buttons */
+.btn-nav-pill.is-selected {
+  background-color: var(--color-ink, #0d0d0d);
+  color: #ffffff;
+  border-color: var(--color-ink, #0d0d0d);
+}
+
+.btn-nav-pill.is-selected:hover {
+  background-color: #262626;
+  border-color: #262626;
+}
+
+/* btn-primary-dark style for Enterprise card */
+.btn-primary-dark {
+  width: 100%;
+  background-color: #ffffff;
+  color: #1a1a1e;
+  border: 1px solid #ffffff;
+  padding: 10px 18px;
+  font-size: 0.9375rem;
+  font-weight: var(--font-weight-medium);
+  border-radius: var(--radius-rect, 2px);
+  transition: all 0.15s ease;
+}
+
+.btn-primary-dark:hover {
+  background-color: #ebebee;
+  border-color: #ebebee;
+  color: #000000;
+}
+
+/* Selected state for enterprise button */
+.btn-primary-dark.is-selected {
+  background: linear-gradient(135deg, #6a2bff 0%, #ff7043 100%);
+  border-color: transparent;
+  color: #ffffff;
+}
+
+.btn-primary-dark.is-selected:hover {
+  filter: brightness(1.08);
+}
+
+/* Active Configuration Status Bar */
+.pricing-configured-status {
+  margin-top: 40px;
+  border: 1px solid var(--border-hairline, #e3e3e3);
+  border-radius: var(--radius-rect, 2px);
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+}
+
+.configured-status-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.status-indicator-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #10b981;
+}
+
+.configured-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-text-tertiary);
+  letter-spacing: 0.05em;
+}
+
+.configured-tier-name {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-ink);
+}
+
+.configured-price-tag {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--color-accent);
+  background-color: var(--color-accent-wash);
+  padding: 3px 10px;
+  border-radius: var(--radius-rect, 2px);
+  border: 1px solid var(--color-accent-tint);
+}
+
+@media (max-width: 960px) {
+  .pricing-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .pricing-configured-status {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+/* ==========================================================================
+   Dark Theme Overrides for App Scoped Elements
+   ========================================================================== */
+[data-theme="dark"] .hero-viewport-scope {
+  background-color: var(--color-canvas);
+}
+
+[data-theme="dark"] .hero-viewport-scope .site-header {
+  background-color: rgba(12, 12, 16, 0.88);
+  border-bottom-color: var(--border-hairline);
+}
+
+[data-theme="dark"] .hero-viewport-scope .hero-stats-row {
+  background-color: rgba(34, 34, 43, 0.88);
+}
+
+[data-theme="dark"] .hero-viewport-scope .hero-stat-card {
+  background-color: #121217;
+}
+
+[data-theme="dark"] .hero-viewport-scope .workflow-chain-card {
+  background-color: rgba(19, 19, 25, 0.96);
+  border-color: var(--border-hairline);
+}
+
+[data-theme="dark"] .pricing-section {
+  background-color: var(--color-canvas);
+  border-bottom-color: var(--border-hairline);
+}
+
+[data-theme="dark"] .pricing-card-standard {
+  background-color: #121218;
+  border-color: var(--border-hairline);
+  color: var(--color-ink);
+}
+
+[data-theme="dark"] .pricing-card-standard:hover {
+  border-color: var(--color-accent);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .pricing-card-standard.is-tier-selected {
+  border: 2px solid var(--color-accent);
+  box-shadow: 0 0 0 4px var(--color-accent-wash), 0 8px 28px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .schematic-radio-pill {
+  background-color: #1a1a24;
+  border-color: #292938;
+  color: var(--color-text-tertiary);
+}
+
+[data-theme="dark"] .pricing-amount {
+  color: #cbb2ff;
+}
+
+[data-theme="dark"] .pricing-divider {
+  border-top-color: #21212b;
+}
+
+[data-theme="dark"] .btn-nav-pill {
+  background-color: #181822;
+  border-color: var(--border-hairline);
+  color: var(--color-ink);
+}
+
+[data-theme="dark"] .btn-nav-pill:hover {
+  background-color: #21212e;
+  border-color: var(--color-accent);
+  color: var(--color-ink);
+}
+
+[data-theme="dark"] .btn-nav-pill.is-selected {
+  background-color: #ffffff;
+  color: #0c0c10;
+  border-color: #ffffff;
+}
+
+[data-theme="dark"] .pricing-configured-status {
+  background-color: rgba(18, 18, 24, 0.94);
+  border-color: var(--border-hairline);
+}
+
+[data-theme="dark"] .configured-tier-name {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .theme-toggle-btn {
+  border-color: #333342;
+  background-color: #16161f;
+  color: #f5f5f7;
+}
+
+[data-theme="dark"] .theme-toggle-btn:hover {
+  border-color: var(--color-accent);
+  color: #d1b8ff;
+  background-color: rgba(157, 111, 255, 0.16);
+}
+
+/* ==========================================================================
+   Pre-Footer Banner / CTA Band Cosmic Shader Styling
+   ========================================================================== */
+.cta-band,
+.pre-footer-banner {
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-band-inner {
+  position: relative;
+  z-index: 2;
+}
+
+[data-theme="dark"] .cta-band,
+[data-theme="dark"] .pre-footer-banner {
+  background-color: #0c0816;
+  border-color: #241638;
+}
+
+

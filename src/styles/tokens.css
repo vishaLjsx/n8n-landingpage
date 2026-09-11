@@ -1,0 +1,63 @@
+:root {
+  /* Color Palette */
+  --color-ink: #0d0d0d;
+  --color-canvas: #ffffff;
+  --border-hairline: #e3e3e3;
+  --border-hairline-dark: #272727;
+  
+  --color-text-primary: #0d0d0d;
+  --color-text-secondary: #4d4d4d;
+  --color-text-tertiary: #6b6b6b;
+  
+  --color-ui-dark: #272727;
+  --color-ui-dark-text: #f0f0f0;
+  
+  /* Accent & Tints */
+  --color-accent: #6a2bff;
+  --color-accent-tint: #efe7ff;
+  --color-accent-wash: #f7f3ff;
+  
+  /* Single-use gradient for hero headline phrase */
+  --gradient-hero: linear-gradient(135deg, #6a2bff 0%, #ff6b4a 100%);
+  
+  /* Typography */
+  --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  
+  /* Geometric constraints */
+  --radius-rect: 2px;
+  --border-width: 1px;
+  
+  /* Layout Spacing */
+  --container-max-width: 1200px;
+  --section-padding-y: 88px;
+  --section-padding-y-compact: 64px;
+  --container-padding-x: 24px;
+}
+
+/* Dark Theme Variables */
+[data-theme="dark"] {
+  --color-ink: #f5f5f7;
+  --color-canvas: #0c0c10;
+  --border-hairline: #22222b;
+  --border-hairline-dark: #383846;
+
+  --color-text-primary: #f5f5f7;
+  --color-text-secondary: #a3a3b2;
+  --color-text-tertiary: #717180;
+
+  --color-ui-dark: #1e1e28;
+  --color-ui-dark-text: #ffffff;
+
+  /* Luminous Violet in Dark Mode */
+  --color-accent: #9d6fff;
+  --color-accent-tint: rgba(157, 111, 255, 0.24);
+  --color-accent-wash: rgba(157, 111, 255, 0.12);
+
+  --gradient-hero: linear-gradient(135deg, #a77bff 0%, #ff825c 100%);
+}
+
