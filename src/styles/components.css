@@ -122,16 +122,6 @@
   letter-spacing: -0.02em;
 }
 
-.brand-mark-version {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  color: var(--color-text-tertiary);
-  padding: 2px 6px;
-  border: 1px solid var(--border-hairline);
-  border-radius: var(--radius-rect);
-  margin-left: 2px;
-}
-
 .nav-links-desktop {
   display: flex;
   align-items: center;

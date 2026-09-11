@@ -44,7 +44,6 @@ export function Header({
               </svg>
             </div>
             <span className="brand-mark-title">{brand.name}</span>
-            <span className="brand-mark-version">{brand.version}</span>
           </a>
 
           {/* Desktop Navigation */}
